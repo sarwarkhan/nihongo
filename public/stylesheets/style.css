@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.bs-example {
+    position: relative;
+    padding: 0px 15px 15px;
+    margin: 0 -15px 15px;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    border-style: solid;
+}
+.bs-example-bg-classes p {
+    padding: 12px;
+}
+
+.btn {
+  margin: 0 0 5px 5px;
+}

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  div.container
+    h1 Learning Japanese
+    pre personal way to learn Japanese language
+    hr
+
+    div.text-right
+        button.btn.btn-info.btn-sm Previous
+        button.btn.btn-primary.btn-sm &nbsp;Random&nbsp;
+        button.btn.btn-success.btn-sm &nbsp;&nbsp;Next&nbsp;&nbsp;
+        if (user)
+          a.btn.btn-danger.btn-sm(href="/new-word") Add New Word
+    div.bs-example.bs-example-bg-classes
+      h3 WORDS
+      p.bg-primary #{data.word_select.english}
+      p.bg-success #{data.word_select.romaji}
+      p.bg-info #{data.word_select.kana}
+      p.bg-warning #{data.word_select.kanji}
+
+      div.row
+        div.col-md-6
+          h4 Examples
+        div.col-md-6
+          if (user)
+            span.pull-right
+              a.btn.btn-danger.btn-sm(href="/new-example") New Example
+      for sentence in data.related_sentences
+        pre
+          p.bg-danger #{sentence.english}
+          p.bg-danger #{sentence.romaji}
+          p.bg-danger #{sentence.kanji}
+          p.color-swatch #{sentence.additional}
