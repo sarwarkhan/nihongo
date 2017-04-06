@@ -7,9 +7,9 @@ block content
     hr
 
     div.text-right
-        button.btn.btn-info.btn-sm Previous
-        button.btn.btn-primary.btn-sm &nbsp;Random&nbsp;
-        button.btn.btn-success.btn-sm &nbsp;&nbsp;Next&nbsp;&nbsp;
+        a.btn.btn-info.btn-sm(href="/previous") Previous
+        a.btn.btn-primary.btn-sm(href="/random") &nbsp;Random&nbsp;
+        a.btn.btn-success.btn-sm(href="/next") &nbsp;&nbsp;Next&nbsp;&nbsp;
         if (user)
           a.btn.btn-danger.btn-sm(href="/new-word") Add New Word
     div.bs-example.bs-example-bg-classes

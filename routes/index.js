@@ -13,8 +13,17 @@ router.get('/', function(req, res, next) {
   var eSession = req.session;
   var latestWord = Counters.findOne({ _id: "current_id" });
   latestWord.exec(function(err, latest) {
-    if(!eSession.isFromExample) {
+    eSession.latestWordId = latest.seq;
+    if(eSession.isRandom) {
       eSession.displayWordId = Math.floor(Math.random() * (latest.seq - 1 + 1)) + 1;
+    } else {
+      if(!eSession.isSessionInitialized) { // conditiona is actually for the first time the application started
+        eSession.displayWordId = Math.floor(Math.random() * (latest.seq - 1 + 1)) + 1;
+        eSession.isRandom = true;
+        eSession.isSessionInitialized = true;
+      }
+    }
+    if(!eSession.isFromExample) {
     } else {
       eSession.isFromExample = false;
     }
@@ -62,8 +71,10 @@ router.post('/new-word', function(req, res) {
         });
         newWord.save(function(err, results) {
           Counters.where({_id: 'current_id'}).update({ $set: {seq: nextSeq} }, function(err, counter) {
-              req.session.isFromExample == true;
-              res.render('new-word', { title: 'Nihongo | Add new word', user : req.user, error: 'New word successfully added.' });
+              req.session.isRandom = false;
+              req.session.displayWordId = nextSeq;
+              //res.render('new-word', { title: 'Nihongo | Add new word', user : req.user, error: 'New word successfully added.' });
+              res.redirect('/');
           });
         });
       }
@@ -96,11 +107,42 @@ router.post('/new-example', function(req, res) {
       additional: req.body.additional
     });
     newExample.save(function(err, results) {
-      req.session.isFromExample = true;
+      req.session.isRandom = false;
       res.redirect('/');
     });
   }
 });
 
+/* Get next word */
+router.get('/next', function(req, res, next){
+  let latestWordId = parseInt(req.session.latestWordId);
+  let nexWordId = parseInt(req.session.displayWordId) + 1;
+  if(nexWordId > latestWordId) {
+    req.session.displayWordId = 1;
+  } else {
+    req.session.displayWordId = nexWordId;
+  }
+  req.session.isRandom = false;
+  res.redirect('/');
+});
+
+/* Get previous word */
+router.get('/previous', function(req, res, next){
+  let latestWordId = parseInt(req.session.latestWordId);
+  let previousWordId = parseInt(req.session.displayWordId) - 1;
+  if(previousWordId < 1) {
+    req.session.displayWordId = latestWordId;
+  } else {
+    req.session.displayWordId = previousWordId;
+  }
+  req.session.isRandom = false;
+  res.redirect('/');
+});
+
+/* Get random word */
+router.get('/random', function(req, res, next){
+  req.session.isRandom = true;
+  res.redirect('/');
+});
 
 module.exports = router;
