@@ -3,7 +3,7 @@ extends ../layout
 block content
   if (!user)
     a.btn.btn-primary.btn-block(href="/users/login") Login
-    a.btn.btn-warning.btn-block(href="/users/register") Register
+    <!-- a.btn.btn-warning.btn-block(href="/users/register") Register -->
     a.btn.btn-info.btn-block(href="/") Back
   if (user)
     p You are currently logged in as #{user.username}

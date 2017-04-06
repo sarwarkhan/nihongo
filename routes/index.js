@@ -37,7 +37,6 @@ router.get('/', function(req, res, next) {
         sentenceQuery.find(callback);
       }
     }, function(err, results) {
-      console.log(eSession);
       res.render('index', { title: 'Nihongo', user : req.user, error: err, data: results });
     });
   });
