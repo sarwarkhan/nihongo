@@ -1,15 +1,13 @@
 # nihongo
 Tools for Japanese Language practice.
 
-# To install dependency run following command:
+> To install dependency run following command: <br/>
 npm install -d
 
-# Use following command to create mongodb table, before run the app:
-mongo
+> Use following command to create required mongodb table, before run the app:
+mongo <br/>
+use nihongo; <br/> 
+db.counters.insert({_id: 'current_id', seq: 0}); <br/>
 
-use nihongo;
-
-db.counters.insert({_id: 'current_id', seq: 0});
-
-# Now run the app:
+> Now run the app: <br/>
 node ./bin/www
