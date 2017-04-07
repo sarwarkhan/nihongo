@@ -14,9 +14,9 @@ block content
     div.bs-example.bs-example-bg-classes
       h3 WORDS
       p.bg-primary #{data.word_select.english}
-      p.bg-success #{data.word_select.romaji}
+      p.bg-success #{data.word_select.kanji}
       p.bg-info #{data.word_select.kana}
-      p.bg-warning #{data.word_select.kanji}
+      p.bg-warning #{data.word_select.romaji}
 
       div.row
         div.col-md-6
@@ -26,8 +26,8 @@ block content
             span.pull-right
               a.btn.btn-danger.btn-sm(href="/new-example") New Example
       for sentence in data.related_sentences
-        pre
-          p.bg-danger #{sentence.english}
-          p.bg-danger #{sentence.romaji}
-          p.bg-danger #{sentence.kanji}
-          p.color-swatch #{sentence.additional}
+        p.bg-danger #{sentence.english}
+        p.bg-danger #{sentence.kanji}
+        p.bg-danger #{sentence.romaji}
+        p.color-swatch #{sentence.additional}
+        hr
