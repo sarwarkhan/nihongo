@@ -29,5 +29,5 @@ block content
         p.bg-danger #{sentence.english}
         p.bg-danger #{sentence.kanji}
         p.bg-danger #{sentence.romaji}
-        p.color-swatch !{sentence.additional}
+        p.color-swatch !{sentence.additional.replace(/\r\n/g, '<br>')}
         hr
